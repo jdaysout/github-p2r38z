@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #5865F2;
+  --primary-dark: #454FBF;
+  --secondary: #2C2F33;
+  --accent: #99AAB5;
+  --background: #000000;
+  --surface: #18191C;
+  --text: #FFFFFF;
+  --text-secondary: #B9BBBE;
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --neo-shadow-dark: #000000;
+  --neo-shadow-light: #2a2a2a;
+  --neo-highlight: rgba(88, 101, 242, 0.1);
+}
+
+/* Hide system cursor */
+html, 
+body, 
+* {
+  cursor: none !important;
+}
+
+/* Enhanced cursor styles */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: width 0.3s var(--animation-timing),
+              height 0.3s var(--animation-timing),
+              background-color 0.3s var(--animation-timing),
+              border-color 0.3s var(--animation-timing);
+}
+
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.3s var(--animation-timing);
+}
+
+.custom-cursor.hovering {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 2px solid var(--primary);
+  mix-blend-mode: normal;
+}
+
+.custom-cursor.hovering::after {
+  inset: -8px;
+  opacity: 0.2;
+  border-width: 2px;
+}
+
+/* Performance optimizations */
+.custom-cursor, 
+.custom-cursor::after {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, width, height, opacity;
+}
+
+/* Mobile and touch device handling */
+@media (pointer: coarse) {
+  html, 
+  body, 
+  * {
+    cursor: auto !important;
+  }
+  
+  .custom-cursor,
+  .custom-cursor::after {
+    display: none;
+  }
+}
+
+/* Rest of your existing styles... */
